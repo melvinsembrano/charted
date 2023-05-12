@@ -19,16 +19,14 @@ fn generate_chart(args: Args) -> Result<(), Box<dyn std::error::Error>> {
     match args.graphtype.to_lowercase().as_str() {
         "pie" => charted::pie::generate(args.input, args.output),
         _ => {
-            println!("Unknown graph type {}", args.graphtype)
+            println!("Unknown graph type {}", args.graphtype);
+            Ok(())
         }
     }
-    Ok(())
 }
 
 fn main() -> Result<(), Box<dyn std::error::Error>> {
     let args = Args::parse();
-    // println!("{:?}", args);
-
     generate_chart(args)?;
 
     Ok(())
