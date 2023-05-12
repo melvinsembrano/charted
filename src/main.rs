@@ -9,7 +9,7 @@ struct Args {
     #[arg(short, long)]
     input: String,
 
-    #[arg(short, long)]
+    #[arg(short, long, default_value = "output.svg")]
     output: String,
 }
 
