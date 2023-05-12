@@ -1,0 +1,11 @@
+{
+  "title": "Fruit Pie",
+  "width": 1200,
+  "height": 1000,
+  "values": {
+    "Apples": 30.0,
+    "Oranges": 46.0,
+    "Kiwi": 14.0,
+    "Bananas": 20.0
+  }
+}

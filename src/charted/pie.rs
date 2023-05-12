@@ -22,8 +22,19 @@ const SLICE_COLORS: [plotters::style::RGBColor; 8] = [
     RGBColor(255, 102, 102),
 ];
 
+fn random_color() -> RGBColor {
+    let r = rand::random::<u8>();
+    let g = rand::random::<u8>();
+    let b = rand::random::<u8>();
+    RGBColor(r, g, b)
+}
+
 fn get_slice_color(index: usize) -> RGBColor {
-    SLICE_COLORS[index % SLICE_COLORS.len()]
+    if index < SLICE_COLORS.len() {
+        SLICE_COLORS[index % SLICE_COLORS.len()]
+    } else {
+        random_color()
+    }
 }
 
 // function generate random color array with length of n
@@ -51,8 +62,10 @@ pub fn generate(input_file: String, output_path: String) -> Result<(), Box<dyn s
         SVGBackend::new(&output_path, (pie_data.width, pie_data.height)).into_drawing_area();
 
     // root_area.fill(&WHITE).unwrap();
-    let title_style = TextStyle::from(("sans-serif", 30).into_font()).color(&(BLACK));
-    root_area.titled(&pie_data.title, title_style).unwrap();
+    if pie_data.title != "" {
+        let title_style = TextStyle::from(("sans-serif", 30).into_font()).color(&(BLACK));
+        root_area.titled(&pie_data.title, title_style).unwrap();
+    }
 
     let dims = root_area.dim_in_pixel();
     let center = (dims.0 as i32 / 2, dims.1 as i32 / 2);
@@ -67,11 +80,11 @@ pub fn generate(input_file: String, output_path: String) -> Result<(), Box<dyn s
 
     let mut pie = Pie::new(&center, &radius, &sizes, &colors, &labels);
     pie.start_angle(66.0);
-    pie.label_style((("sans-serif", 50).into_font()).color(&(ORANGE)));
+    pie.label_style((("sans-serif", 32).into_font()).color(&(ORANGE)));
     pie.percentages((("sans-serif", radius * 0.08).into_font()).color(&BLACK));
     root_area.draw(&pie)?;
 
-    println!("Done!");
+    println!("Pie chart generated to {}", output_path);
 
     Ok(())
 }
