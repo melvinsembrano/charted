@@ -22,7 +22,7 @@ pub fn generate(input_file: String, output_path: String) -> Result<(), Box<dyn s
         .map(|(k, v)| (k.as_str(), *v))
         .collect();
 
-    println!("Pie values: {:?}", pie_values);
+    println!(r#"Generation pie chart with: {:?}"#, pie_values);
 
     let root_area =
         SVGBackend::new(&output_path, (pie_data.width, pie_data.height)).into_drawing_area();
