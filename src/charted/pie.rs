@@ -46,7 +46,7 @@ pub fn generate(input_file: String, output_path: String) -> Result<(), Box<dyn s
 
     let mut pie = Pie::new(&center, &radius, &sizes, &colors, &labels);
     pie.start_angle(66.0);
-    pie.label_style((("sans-serif", 32).into_font()).color(&(ORANGE)));
+    pie.label_style((("sans-serif", 24).into_font()).color(&(ORANGE)));
     pie.percentages((("sans-serif", radius * 0.08).into_font()).color(&BLACK));
     root_area.draw(&pie)?;
 
